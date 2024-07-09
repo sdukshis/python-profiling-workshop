@@ -1,11 +1,12 @@
 """Julia set generator """
+import line_profiler
 
 # area of complex space to investigate
 x1, x2, y1, y2 = -1.8, 1.8, -1.8, 1.8
 c = -0.62772 -.42193j
 
 
-# @profile
+@line_profiler.profile
 def calculate_z_serial_purepython(maxiter, zs):
     """Calculate output list using Julia update rule"""
     output = [0] * len(zs)
@@ -18,7 +19,7 @@ def calculate_z_serial_purepython(maxiter, zs):
     return output
 
 
-# @profile
+@line_profiler.profile
 def calc_pure_python(desired_width, max_iterations):
     """Create a list of complex co-ordinates (zs) and complex parameters (cs), build Julia set and display"""
     x_step = (x2 - x1) / desired_width

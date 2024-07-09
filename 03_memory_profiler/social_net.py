@@ -25,5 +25,5 @@ def calculate_average_friends(users, friendships):
     total_friends = sum(friend_counts.values())
     return total_friends / len(users)
 
-users, friendships = generate_users_and_friendships(2000)
+users, friendships = generate_users_and_friendships(1000)
 print(calculate_average_friends(users, friendships))

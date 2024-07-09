@@ -1,11 +1,16 @@
 """Peter Norvig simple spell correction http://norvig.com/spell-correct.html"""
-
+import os
 import re
 from collections import Counter
 
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+BIG_TXT = os.path.join(SCRIPT_DIR, 'big.txt')
+SPELL_TESTSET1_TXT = os.path.join(SCRIPT_DIR, 'spell-testset1.txt')
+
+
 def words(text): return re.findall(r'\w+', text.lower())
 
-WORDS = Counter(words(open('big.txt').read()))
+WORDS = Counter(words(open(BIG_TXT).read()))
 
 def P(word, N=sum(WORDS.values())): 
     "Probability of `word`."
@@ -81,8 +86,8 @@ def Testset(lines):
             for (right, wrongs) in (line.split(':') for line in lines)
             for wrong in wrongs.split()]
 
-spelltest(Testset(open('spell-testset1.txt'))) # Final test set
+spelltest(Testset(open(SPELL_TESTSET1_TXT))) # Final test set
 
 
 def test_correction(benchmark):
-    benchmark(spelltest, Testset(open('spell-testset1.txt')))
+    benchmark(spelltest, Testset(open(SPELL_TESTSET1_TXT)))

@@ -11,7 +11,3 @@ def print_stats(a: np.array) -> None:
     print(f"{'90-perc:':<10} {np.percentile(a, q=90):10.0f}")
     print(f"{'Max:':<10} {np.max(a):10.0f}")
 
-
-if 'profile' not in dir():
-    def profile(func):
-        return func
